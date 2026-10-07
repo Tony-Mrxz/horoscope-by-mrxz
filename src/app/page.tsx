@@ -110,96 +110,90 @@ export default function Home() {
 
       {/* MAIN CONTAINER */}
       <main className="relative z-10 flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 flex flex-col gap-8">
-        {/* ZODIAC SELECTOR */}
-        <section className="flex flex-col items-center gap-3 w-full">
-          <div className="flex items-center justify-between w-full max-w-md px-1">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
-              Zodiac Sign
-            </h2>
-            <span className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">
-              {selectedSign.name} ({selectedSign.symbol})
-            </span>
+        {/* TOP LAYOUT: LEFT SIDE CONTROLS & RIGHT SIDE HERO / LUCK SCORE */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* LEFT SIDE: ZODIAC DROPDOWN (NO TEXT ABOVE IT) & DATE TABS */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            <ZodiacSelector
+              selectedId={selectedSign.id}
+              onSelect={(sign) => setSelectedSign(sign)}
+            />
+
+            <HoroscopeTabs
+              activeTab={activeTab}
+              onTabChange={(tab) => setActiveTab(tab)}
+            />
           </div>
-          <ZodiacSelector
-            selectedId={selectedSign.id}
-            onSelect={(sign) => setSelectedSign(sign)}
-          />
-        </section>
 
-        {/* DATE TABS */}
-        <section className="flex justify-center max-w-md mx-auto w-full">
-          <HoroscopeTabs
-            activeTab={activeTab}
-            onTabChange={(tab) => setActiveTab(tab)}
-          />
-        </section>
+          {/* RIGHT SIDE: HERO CARD WITH TITLE, DATE & LUCK SCORE */}
+          <div className="lg:col-span-7">
+            {loading && <LoadingSkeleton />}
 
-        {/* CONTENT STATES */}
-        <div className="w-full">
-          {loading && <LoadingSkeleton />}
+            {!loading && error && (
+              <ErrorState message={error} onRetry={fetchHoroscopeData} />
+            )}
 
-          {!loading && error && (
-            <ErrorState message={error} onRetry={fetchHoroscopeData} />
-          )}
-
-          {!loading && !error && horoscope && (
-            <div className="flex flex-col gap-6 animate-fadeIn">
-              {/* HERO SECTION */}
+            {!loading && !error && horoscope && (
               <HoroscopeHero
                 data={horoscope}
                 sign={selectedSign}
                 dateLabel={dateLabel}
               />
-
-              {/* THREE MAIN CARDS */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <HoroscopeCard
-                  title="Love Horoscope"
-                  emoji="❤️"
-                  content={
-                    getContentText(horoscope.contents?.love) ||
-                    'Love insights unavailable for this date.'
-                  }
-                  points={horoscope.points?.love}
-                  accentColor="rose"
-                />
-
-                <HoroscopeCard
-                  title="Career Horoscope"
-                  emoji="💼"
-                  content={
-                    getContentText(horoscope.contents?.career) ||
-                    'Career insights unavailable for this date.'
-                  }
-                  points={horoscope.points?.career}
-                  accentColor="sky"
-                />
-
-                <HoroscopeCard
-                  title="Wealth Horoscope"
-                  emoji="💰"
-                  content={
-                    getContentText(horoscope.contents?.fortune) ||
-                    'Wealth insights unavailable for this date.'
-                  }
-                  points={horoscope.points?.fortune}
-                  accentColor="amber"
-                />
-              </div>
-
-              {/* OVERALL HOROSCOPE */}
-              {horoscope.contents?.all && (
-                <HoroscopeCard
-                  title="Overall Daily Insight"
-                  emoji="✨"
-                  content={getContentText(horoscope.contents.all)}
-                  points={horoscope.points?.all}
-                  accentColor="indigo"
-                />
-              )}
-            </div>
-          )}
+            )}
+          </div>
         </div>
+
+        {/* BELOW: COMPLETE DETAILED HOROSCOPE SECTION */}
+        {!loading && !error && horoscope && (
+          <div className="flex flex-col gap-6 animate-fadeIn">
+            {/* THREE MAIN CARDS: LOVE, CAREER, WEALTH */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <HoroscopeCard
+                title="Love Horoscope"
+                emoji="❤️"
+                content={
+                  getContentText(horoscope.contents?.love) ||
+                  'Love insights unavailable for this date.'
+                }
+                points={horoscope.points?.love}
+                accentColor="rose"
+              />
+
+              <HoroscopeCard
+                title="Career Horoscope"
+                emoji="💼"
+                content={
+                  getContentText(horoscope.contents?.career) ||
+                  'Career insights unavailable for this date.'
+                }
+                points={horoscope.points?.career}
+                accentColor="sky"
+              />
+
+              <HoroscopeCard
+                title="Wealth Horoscope"
+                emoji="💰"
+                content={
+                  getContentText(horoscope.contents?.fortune) ||
+                  'Wealth insights unavailable for this date.'
+                }
+                points={horoscope.points?.fortune}
+                accentColor="amber"
+              />
+            </div>
+
+            {/* OVERALL DAILY INSIGHT CARD */}
+            {horoscope.contents?.all && (
+              <HoroscopeCard
+                title="Overall Daily Insight"
+                emoji="✨"
+                content={getContentText(horoscope.contents.all)}
+                points={horoscope.points?.all}
+                accentColor="indigo"
+              />
+            )}
+          </div>
+        )}
       </main>
 
       {/* FOOTER */}
