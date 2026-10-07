@@ -11,7 +11,7 @@ interface HoroscopeHeroProps {
 
 export default function HoroscopeHero({ data, sign, dateLabel }: HoroscopeHeroProps) {
   return (
-    <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-indigo-500/10 dark:border-white/10 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-6 sm:p-8">
+    <div className="relative rounded-3xl overflow-hidden shadow-xl border border-zinc-200/80 dark:border-white/10 bg-white/90 dark:bg-zinc-900/80 backdrop-blur-xl p-6 sm:p-8">
       {/* Ambient Cosmic Background Glow */}
       <div className="absolute -top-24 -left-24 w-80 h-80 bg-indigo-500/10 dark:bg-indigo-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-purple-500/10 dark:bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
@@ -24,7 +24,7 @@ export default function HoroscopeHero({ data, sign, dateLabel }: HoroscopeHeroPr
           <div className="flex flex-col gap-4">
             {/* Symbol Circle + Name & Date */}
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 flex items-center justify-center text-3xl sm:text-4xl font-serif shadow-sm flex-shrink-0">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200/80 dark:border-indigo-500/20 flex items-center justify-center text-3xl sm:text-4xl font-serif shadow-sm flex-shrink-0">
                 {sign.symbol}
               </div>
               <div className="flex flex-col">
@@ -39,7 +39,7 @@ export default function HoroscopeHero({ data, sign, dateLabel }: HoroscopeHeroPr
 
             {/* Short Summary Quote */}
             {data.shorts && (
-              <blockquote className="text-sm sm:text-base text-zinc-700 dark:text-zinc-200 leading-relaxed italic border-l-2 border-indigo-500/60 pl-3.5 py-1.5 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-r-xl mt-2">
+              <blockquote className="text-sm sm:text-base text-zinc-800 dark:text-zinc-200 leading-relaxed italic border-l-2 border-indigo-500/60 pl-3.5 py-1.5 bg-indigo-50/70 dark:bg-indigo-500/10 rounded-r-xl mt-2">
                 &ldquo;{data.shorts}&rdquo;
               </blockquote>
             )}
@@ -49,7 +49,7 @@ export default function HoroscopeHero({ data, sign, dateLabel }: HoroscopeHeroPr
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-auto pt-2">
             {data.luckly_color && (
               <div className="flex flex-col p-2.5 rounded-xl bg-zinc-100/80 dark:bg-white/5 border border-zinc-200/80 dark:border-white/5">
-                <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">Lucky Color</span>
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-semibold">Lucky Color</span>
                 <span className="text-xs font-bold text-zinc-900 dark:text-white mt-1 flex items-center gap-1.5 truncate">
                   <span className="w-2 h-2 rounded-full bg-indigo-500 inline-block flex-shrink-0" />
                   {data.luckly_color}
@@ -59,7 +59,7 @@ export default function HoroscopeHero({ data, sign, dateLabel }: HoroscopeHeroPr
 
             {data.luckly_time && (
               <div className="flex flex-col p-2.5 rounded-xl bg-zinc-100/80 dark:bg-white/5 border border-zinc-200/80 dark:border-white/5">
-                <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">Lucky Time</span>
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-semibold">Lucky Time</span>
                 <span className="text-xs font-bold text-zinc-900 dark:text-white mt-1 truncate">
                   {data.luckly_time}
                 </span>
@@ -68,7 +68,7 @@ export default function HoroscopeHero({ data, sign, dateLabel }: HoroscopeHeroPr
 
             {data.direction && (
               <div className="flex flex-col p-2.5 rounded-xl bg-zinc-100/80 dark:bg-white/5 border border-zinc-200/80 dark:border-white/5">
-                <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">Direction</span>
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-semibold">Direction</span>
                 <span className="text-xs font-bold text-zinc-900 dark:text-white mt-1 truncate">
                   {data.direction}
                 </span>
@@ -77,7 +77,7 @@ export default function HoroscopeHero({ data, sign, dateLabel }: HoroscopeHeroPr
 
             {data.friends && (
               <div className="flex flex-col p-2.5 rounded-xl bg-zinc-100/80 dark:bg-white/5 border border-zinc-200/80 dark:border-white/5">
-                <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">Compatible</span>
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-semibold">Compatible</span>
                 <span className="text-xs font-bold text-zinc-900 dark:text-white mt-1 truncate">
                   {data.friends}
                 </span>
@@ -113,7 +113,7 @@ function MiniScore({ label, points, emoji }: { label: string; points: string; em
   const pct = Math.round(parseFloat(points || '0') * 20);
   const stars = Math.round(parseFloat(points || '0'));
   return (
-    <div className="flex flex-col items-center text-center gap-1 p-3 rounded-2xl bg-zinc-100/60 dark:bg-white/5 border border-zinc-200/60 dark:border-white/5 shadow-sm">
+    <div className="flex flex-col items-center text-center gap-1 p-3 rounded-2xl bg-zinc-100/80 dark:bg-white/5 border border-zinc-200/80 dark:border-white/5 shadow-sm">
       <span className="text-lg">{emoji}</span>
       <span className="text-base sm:text-lg font-extrabold text-zinc-900 dark:text-white tabular-nums tracking-tight">
         {pct}%
