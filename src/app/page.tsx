@@ -110,42 +110,44 @@ export default function Home() {
 
       {/* MAIN CONTAINER */}
       <main className="relative z-10 flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 flex flex-col gap-8">
-        {/* TOP LAYOUT: LEFT SIDE CONTROLS & RIGHT SIDE HERO / LUCK SCORE */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* LEFT SIDE: ZODIAC DROPDOWN (NO TEXT ABOVE IT) & DATE TABS */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+        
+        {/* TOP CONTROLS: ZODIAC DROPDOWN & DATE TABS */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="w-full sm:w-[320px]">
             <ZodiacSelector
               selectedId={selectedSign.id}
               onSelect={(sign) => setSelectedSign(sign)}
             />
+          </div>
 
+          <div className="w-full sm:w-auto">
             <HoroscopeTabs
               activeTab={activeTab}
               onTabChange={(tab) => setActiveTab(tab)}
             />
           </div>
-
-          {/* RIGHT SIDE: HERO CARD WITH TITLE, DATE & LUCK SCORE */}
-          <div className="lg:col-span-7">
-            {loading && <LoadingSkeleton />}
-
-            {!loading && error && (
-              <ErrorState message={error} onRetry={fetchHoroscopeData} />
-            )}
-
-            {!loading && !error && horoscope && (
-              <HoroscopeHero
-                data={horoscope}
-                sign={selectedSign}
-                dateLabel={dateLabel}
-              />
-            )}
-          </div>
         </div>
 
-        {/* BELOW: COMPLETE DETAILED HOROSCOPE SECTION */}
+        {/* HERO SECTION (MATCHES WIREFRAME LAYOUT TEMPLATE) */}
+        <div className="w-full">
+          {loading && <LoadingSkeleton />}
+
+          {!loading && error && (
+            <ErrorState message={error} onRetry={fetchHoroscopeData} />
+          )}
+
+          {!loading && !error && horoscope && (
+            <HoroscopeHero
+              data={horoscope}
+              sign={selectedSign}
+              dateLabel={dateLabel}
+            />
+          )}
+        </div>
+
+        {/* DETAILED HOROSCOPE SECTION BELOW */}
         {!loading && !error && horoscope && (
-          <div className="flex flex-col gap-6 animate-fadeIn">
+          <div className="flex flex-col gap-6 animate-fadeIn mt-2">
             {/* THREE MAIN CARDS: LOVE, CAREER, WEALTH */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <HoroscopeCard
