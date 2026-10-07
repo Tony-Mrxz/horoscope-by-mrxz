@@ -46,17 +46,9 @@ export default function ZodiacSelector({ selectedId, onSelect }: ZodiacSelectorP
           <div className="w-10 h-10 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-2xl font-serif">
             {currentSign.symbol}
           </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-base text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
-                {currentSign.name}
-              </span>
-              <span className="text-sm">{currentSign.emoji}</span>
-            </div>
-            <span className="text-xs text-zinc-500 dark:text-zinc-400">
-              {currentSign.dateRange}
-            </span>
-          </div>
+          <span className="font-bold text-lg text-zinc-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
+            {currentSign.name}
+          </span>
         </div>
 
         {/* Chevron Icon */}
@@ -89,7 +81,7 @@ export default function ZodiacSelector({ selectedId, onSelect }: ZodiacSelectorP
                 aria-selected={isSelected}
                 onClick={() => handleSelect(sign)}
                 className={`
-                  w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all duration-150 cursor-pointer text-left
+                  w-full flex items-center justify-between px-3.5 py-3 rounded-xl transition-all duration-150 cursor-pointer text-left
                   ${
                     isSelected
                       ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-500/20'
@@ -99,19 +91,7 @@ export default function ZodiacSelector({ selectedId, onSelect }: ZodiacSelectorP
               >
                 <div className="flex items-center gap-3">
                   <span className="text-xl w-7 text-center font-serif">{sign.symbol}</span>
-                  <div>
-                    <div className="flex items-center gap-1.5 text-sm">
-                      <span>{sign.name}</span>
-                      <span className="text-xs">{sign.emoji}</span>
-                    </div>
-                    <div
-                      className={`text-[11px] ${
-                        isSelected ? 'text-indigo-100' : 'text-zinc-400 dark:text-zinc-400'
-                      }`}
-                    >
-                      {sign.dateRange}
-                    </div>
-                  </div>
+                  <span className="text-base font-semibold">{sign.name}</span>
                 </div>
                 {isSelected && (
                   <span className="text-sm font-bold">✓</span>
