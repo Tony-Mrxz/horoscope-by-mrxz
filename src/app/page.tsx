@@ -111,10 +111,10 @@ export default function Home() {
       {/* MAIN CONTAINER */}
       <main className="relative z-10 flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 flex flex-col gap-8">
         {/* ZODIAC SELECTOR */}
-        <section className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
+        <section className="flex flex-col items-center gap-3 w-full">
+          <div className="flex items-center justify-between w-full max-w-md px-1">
             <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
-              Select Zodiac Sign
+              Zodiac Sign
             </h2>
             <span className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">
               {selectedSign.name} ({selectedSign.symbol})
