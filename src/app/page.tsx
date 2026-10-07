@@ -206,7 +206,7 @@ export default function Home() {
             <span>—</span>
             <span>Real-time Horoscope & Celestial Energy</span>
           </div>
-          <p>© 2026 Constella. Powered by real celestial data.</p>
+          <p>© 2026 Constella — Powered by Mrxz Labs</p>
         </div>
       </footer>
     </div>
